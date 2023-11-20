@@ -1,131 +1,244 @@
 {
-  "openapi": "3.0.0",
-  "info": {
-    "title": "GovData.de CKAN API",
-    "version": "1.0.0",
-    "description": "API for accessing and managing datasets of GovData.de, the German national data portal."
-  },
-  "servers": [
-    {
-      "url": "https://www.govdata.de/ckan/api/3/"
-    }
-  ],
-  "paths": {
-    "/action/package_search": {
-      "get": {
-        "summary": "Search for datasets",
-        "operationId": "package_search",
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "Search query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "fq",
-            "in": "query",
-            "description": "Filter query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "sort",
-            "in": "query",
-            "description": "Sorting options",
-            "required": false,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful search",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SearchResponse"
-                }
-              }
-            }
-          }
-        }
-      }
+    "openapi": "3.0.2",
+    "info": {
+        "title": "CKAN API",
+        "description": "The CKAN API for accessing and managing datasets of GovData.de, the German Open Data Portal. Use a limit:50 as a parameter for queries to avoid too long responses!",
+        "version": "1.0.0"
     },
-    "/action/package_show": {
-      "get": {
-        "summary": "Retrieve a dataset by ID",
-        "operationId": "package_show",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "description": "Dataset ID",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful retrieval",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DatasetResponse"
+    "servers": [
+        {
+            "url": "https://www.govdata.de/ckan/api/3/"
+        }
+    ],
+    "paths": {
+        "/action/package_search": {
+            "get": {
+                "summary": "Search for datasets",
+                "operationId": "package_search",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "q",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "description": "Search query"
+                    },
+                    {
+                        "in": "query",
+                        "name": "fq",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "description": "Filter query"
+                    },
+                    {
+                        "in": "query",
+                        "name": "sort",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false,
+                        "description": "Sorting options"
+                    },
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": false,
+                        "description": "Limit the number of results, use 50 as default value!"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": false,
+                        "description": "Offset for the results"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful search",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "properties": {
+                                                "count": {
+                                                    "type": "integer"
+                                                },
+                                                "results": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "additionalProperties": true
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          },
-          "404": {
-            "description": "Dataset not found"
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "SearchResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "result": {
-            "type": "object",
-            "properties": {
-              "count": {
-                "type": "integer"
-              },
-              "results": {
-                "type": "array",
-                "items": {
-                  "type": "object"
+        },
+        "/action/package_show": {
+            "get": {
+                "summary": "Retrieve a dataset by ID",
+                "operationId": "package_show",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "Dataset ID"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "result": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Dataset not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-              }
             }
-          }
+        },
+        "/action/package_list": {
+            "get": {
+                "summary": "List all packages with pagination",
+                "operationId": "package_list",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "limit",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": false,
+                        "description": "Limit the number of results, use 50 as default value!"
+                    },
+                    {
+                        "in": "query",
+                        "name": "offset",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "required": false,
+                        "description": "Offset for the results"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful retrieval of package list",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "result": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Bad request",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "error": {
+                                            "type": "object",
+                                            "additionalProperties": true
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-      },
-      "DatasetResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean"
-          },
-          "result": {
-            "type": "object"
-          }
-        }
-      }
     }
-  }
 }
