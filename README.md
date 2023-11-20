@@ -12,7 +12,7 @@ Doku:
 
 # Actions
 * [transparenzportal-karlsruhe-ckan.json](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/actions/transparenzportal-karlsruhe-ckan.json)
-* [govdata-ckan.json](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/actions/govdata-ckan.json) (Not working rn, because the responses are too long)
+* [govdata-ckan.json](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/actions/govdata-ckan.json) 
 * 
 # Knowledge
 Todo
