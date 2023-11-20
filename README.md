@@ -22,3 +22,7 @@ Todo
 # Demo
 
 ![](opendata-ka.gif)
+
+
+# Similar Projects
+* Opendata Buddy from autstria https://www.open3.at/2023/11/opendata-buddy
