@@ -6,7 +6,7 @@ Try it: https://chat.openai.com/g/g-uiJQsroGg-open-data-portals-germany
 
 Doku:
 * [what is a GPT?](https://openai.com/blog/introducing-gpts)
-*[ What is a action](https://platform.openai.com/docs/actions)
+* [ What is a action](https://platform.openai.com/docs/actions)
 
 **Help and feedback is always welcome!**
 
