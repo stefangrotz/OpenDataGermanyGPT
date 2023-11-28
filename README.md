@@ -17,7 +17,7 @@ Doku:
 # Knowledge
 Todo
 * [List of all Portals](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/knowledge/portals.md) in Germany, Austria and Switzerland
-* CKAN documentation?
+* CKAN documentation https://docs.ckan.org/ ?
 
 # Demo
 
