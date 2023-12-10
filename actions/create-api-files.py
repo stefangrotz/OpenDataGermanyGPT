@@ -1,13 +1,5 @@
 import json
 
-# List of endpoints with names
-endpoints = [
-    {"name": "OpenData_HRO", "url": "https://www.opendata-hro.de/api/3/"},
-    {"name": "Offene_Daten_Moers", "url": "https://www.offenesdatenportal.de/api/3/"},
-    {"name": "Open_Data_Koeln", "url": "https://www.offenedaten-koeln.de/api/3/"},
-    # ... include all other endpoints with their names here ...
-]
-
 # Function to create the API structure with dynamic description
 def create_api_structure(url,name):
     return {
@@ -17,7 +9,6 @@ def create_api_structure(url,name):
             "description": f"The CKAN API for accessing and managing datasets from {name}. Use a limit:50 as a parameter for queries to avoid too long responses!",
             "version": "1.0.0"
         },
-        # ... include other necessary fields here ...
         "servers": [{"url": url}],
     "paths": {
         "/action/package_search": {
@@ -260,6 +251,21 @@ def create_api_file(endpoint_info):
     with open(file_name, 'w') as file:
         json.dump(api_structure, file, indent=4)
     print(f"Created file: {file_name}")
+
+# Function to truncate URL to 'api/3/'
+def truncate_url(url):
+    index = url.find('api/3/')
+    return url[:index + 6] if index != -1 else url
+
+# Load the JSON data from the file
+with open('query.json', 'r') as file:
+    portals = json.load(file)
+
+# Prepare a list of endpoints using the loaded JSON data
+endpoints = [
+    {"name": portal["portalLabel"], "url": truncate_url(portal["hasApiEndpoint"])}
+    for portal in portals if "hasApiEndpoint" in portal
+]
 
 # Create an API file for each endpoint
 for endpoint in endpoints:
