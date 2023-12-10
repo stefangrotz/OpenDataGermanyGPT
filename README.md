@@ -16,8 +16,11 @@ Doku:
 * 
 # Knowledge
 Todo
-* [List of all Portals](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/knowledge/portals.md) in Germany, Austria and Switzerland
-* CKAN documentation https://docs.ckan.org/ ?
+* Expand the [List of all Portals](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/knowledge/portals.md) in Germany, Austria and Switzerland
+* Add CKAN documentation https://docs.ckan.org/ to the knowledge of the system ?
+* Create and improve the [Script](https://github.com/stefangrotz/OpenDataGermanyGPT/blob/main/actions/create-api-files.py) that can create actions for all Portals on Wikidata
+    * Handle API version 2 and 3 differently
+    * improve API description (searches not working rn)
 
 # Demo
 
