@@ -289,7 +289,7 @@ def create_api_file(endpoint_info):
 
 # Function to truncate URL to 'api/3/'
 def truncate_url(url):
-    index = url.find('api/3/')
+    index = url.find('api/3')
     return url[:index + 6] if index != -1 else url
 
 # Process the data (assuming it's in the format you expect)
@@ -298,15 +298,17 @@ portals = [item for item in data['results']['bindings']]
 # Try to create endpoints with additional checks and debugging prints
 endpoints = []
 for portal in portals:
-    # Check if necessary keys are present
-    if "portalLabel" in portal and "value" in portal["portalLabel"] and "hasApiEndpoint" in portal and "value" in portal["hasApiEndpoint"]:
+    # Check if necessary keys are present and if '3/' is in the URL
+    if ("portalLabel" in portal and "value" in portal["portalLabel"] and 
+        "hasApiEndpoint" in portal and "value" in portal["hasApiEndpoint"] and
+        '3/' in portal["hasApiEndpoint"]["value"]):
         endpoint = {
             "name": portal["portalLabel"]["value"], 
             "url": truncate_url(portal["hasApiEndpoint"]["value"])
         }
         endpoints.append(endpoint)
     else:
-        print(f"Skipping portal due to missing data: {portal}")
+        print(f"Skipping portal due to missing data or URL format: {portal}")
 
 # Debug print to check the endpoints list
 print(endpoints)
