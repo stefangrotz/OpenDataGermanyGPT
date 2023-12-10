@@ -1,0 +1,36 @@
+name: Run Python Script and Create Pull Request
+on: [workflow_dispatch]
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'  # Specify the Python version
+
+    - name: Run Python Script
+      run: python actions/create-api-files.py  # Replace with your script's name
+
+    - name: Commit changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add -A
+        git commit -m "Auto-update from script" -a || echo "No changes to commit"
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        commit-message: "Update data"
+        title: "Automated Data Update"
+        body: "Updating data via automated script"
+        branch: "automated-changes"
+        delete-branch: true
+        draft: false
