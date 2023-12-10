@@ -18,7 +18,7 @@ jobs:
       run: pip install requests
 
     - name: Run Python Script
-      run: python actions/create-api-files.py  # Replace with your script's name
+      run: create-api-files.py  # Replace with your script's name
       working-directory: ./actions  
 
     - name: Commit changes
