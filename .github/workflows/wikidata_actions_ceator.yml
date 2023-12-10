@@ -1,4 +1,4 @@
-name: Run Python Script and Create Pull Request
+name: Create Actions for V3 CKAN Portals from Wikidata
 on: [workflow_dispatch]
 
 jobs:
@@ -19,6 +19,7 @@ jobs:
 
     - name: Run Python Script
       run: python actions/create-api-files.py  # Replace with your script's name
+      working-directory: ./actions  
 
     - name: Commit changes
       run: |
@@ -31,7 +32,7 @@ jobs:
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        title: Auto-commit Data
-        commit-message: Wikidata action creation
+        title: V3 CKAN portals auto creation
+        commit-message: V3 CKAN portals auto creation from Wikidata
         branch: update-data
         delete-branch: true
