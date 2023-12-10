@@ -27,13 +27,11 @@ jobs:
         git add -A
         git commit -m "Auto-update from script" -a || echo "No changes to commit"
 
-    - name: Create Pull Request
+    - name: Create pull request
       uses: peter-evans/create-pull-request@v3
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
-        commit-message: "Update data"
-        title: "Automated Data Update"
-        body: "Updating data via automated script"
-        branch: "automated-changes"
+        title: Auto-commit Data
+        commit-message: Wikidata action creation
+        branch: update-data
         delete-branch: true
-        draft: false
