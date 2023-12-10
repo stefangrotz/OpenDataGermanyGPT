@@ -15,7 +15,7 @@ jobs:
         python-version: '3.8'  # Specify the Python version
 
     - name: Install Python dependencies
-      run: pip install requests json
+      run: pip install requests
 
     - name: Run Python Script
       run: python actions/create-api-files.py  # Replace with your script's name
