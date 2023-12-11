@@ -11,7 +11,7 @@ Doku:
 **Help and feedback is always welcome!**
 
 # Actions
-* [25 auto generated Actions](https://github.com/stefangrotz/OpenDataGermanyGPT/tree/main/actions))](https://github.com/stefangrotz/OpenDataGermanyGPT/tree/main/actions) of all V3 CKAN portals on Wikidata from the DACH region. Right now only Karlsruhe is usable, the rest will follow in the future.
+* [25 auto generated Actions](https://github.com/stefangrotz/OpenDataGermanyGPT/tree/main/actions) of all V3 CKAN portals on Wikidata from the DACH region. Right now only Karlsruhe is usable, the rest will follow in the future.
 
 # Knowledge
 Todo
